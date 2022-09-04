@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Run unit tests
           command: |
-            python -m unittest discover -s tests
+            poetry run pytest .
           environment:
             PYTHONPATH: src
       - store_test_results:
