@@ -3,7 +3,7 @@ import unittest
 from fizzbuzz import fizzbuzz
 
 
-class MyTestCase(unittest.TestCase):
+class FizzBuzzTestCase(unittest.TestCase):
     def test_fizz_cases(self):
         for case in [
             3,
