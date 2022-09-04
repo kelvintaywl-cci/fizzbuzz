@@ -11,7 +11,7 @@ executors:
 
 jobs:
   test:
-    parallelism: 1
+    parallelism: 2
     executor: py-3-10
     steps:
       - checkout
@@ -21,7 +21,12 @@ jobs:
       - run:
           name: Run unit tests
           command: |
-            poetry run pytest .
+            TEST_FILES=$(circleci tests glob "tests/**/test_*.py" | circleci tests split --split-by=timings)
+
+            # debug
+            echo "test files to run:\n\n$TEST_FILES\n"
+
+            poetry run pytest $TEST_FILES
           environment:
             PYTHONPATH: src
       - store_test_results:
