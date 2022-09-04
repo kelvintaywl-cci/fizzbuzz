@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  python: circleci/python@2.0.3
+
 executors:
   py-3-10:
     docker:
@@ -12,6 +15,9 @@ jobs:
     executor: py-3-10
     steps:
       - checkout
+      # use Python orb to handle dependencies installation, incl, caching.
+      - python/install-packages:
+          pkg-manager: poetry
       - run:
           name: Run unit tests
           command: |
